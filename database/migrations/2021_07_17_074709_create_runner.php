@@ -16,9 +16,11 @@ class CreateRunner extends Migration
             $table->integer('startnumber');
             $table->string('name');
             $table->foreignId('category_id')->constrained();
-            $table->foreignId('club_id');
+            $table->foreignId('club_id')->constrained();
             $table->integer('year_of_birth')->nullable();
             $table->timestampsTz();
+            $table->unique('startnumber');
+            $table->index('startnumber');
         });
     }
 
