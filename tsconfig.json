@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "sourceMap": true,
+      "experimentalDecorators": true,
+      "jsx": "preserve",
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true,
+      "target": "ES5",
+      "downlevelIteration": true
+    },
+    "include": [
+      "resources/**/*.ts",
+      "resources/**/*.tsx",
+      "resources/vue/**/*.vue",
+      "resources/vue/**/*.json"
+    ],
+    "exclude": ["node_modules"]
+  }
