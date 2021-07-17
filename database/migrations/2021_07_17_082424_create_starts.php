@@ -18,6 +18,8 @@ class CreateStarts extends Migration
             $table->foreignId('category_id')->constrained();
             $table->string('start_time');
             $table->timestampsTz();
+            $table->unique(['runner_id', 'stage_id', 'category_id']);
+            $table->index(['runner_id', 'stage_id', 'category_id']);
         });
     }
 
