@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Stage;
 use App\Models\Category;
+use App\Models\Start;
 use Illuminate\Http\Request;
 
 class SOW extends Controller
@@ -26,9 +27,13 @@ class SOW extends Controller
 
     }
 
- public function category(){
+ public function category(Stage $stage, Category $category){
 
-    return view('page.category');
+
+$category_starts = Start::where(['stage_id' => $stage->id ,'category_id' =>$category->id])->get();
+
+
+    return view('page.category', compact('stage','category','category_starts'));
                 
-                    }
+    }
 }
