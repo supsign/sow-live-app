@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,7 +12,27 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix.copyDirectory('resources/img/', 'public/img/');
+
+// // FontAwesome Main CSS + Webfonts / SVG
+mix.copyDirectory(
+  'node_modules/@fortawesome/fontawesome-pro/webfonts',
+  'public/vendors/fontawesome-pro/webfonts'
+);
+mix.copyDirectory(
+  'node_modules/@fortawesome/fontawesome-pro/svgs',
+  'public/vendors/fontawesome-pro/svgs'
+);
+
+mix.copy(
+  'node_modules/@fortawesome/fontawesome-pro/css/all.min.css',
+  'public/vendors/fontawesome-pro/css/all.min.css'
+);
+
+mix.sass('resources/sass/app.scss', 'public/css').options({
+  processCssUrls: false,
+  precision: 5,
+  postCss: [tailwindcss('./tailwind.config.js')],
+});
+
+mix.ts('resources/vue/app.ts', 'public/js').vue();

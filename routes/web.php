@@ -3,6 +3,10 @@
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\SOW;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,8 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/test', [TestController::class, 'test']);
+Route::get('/', [SOW::class, 'competition']);
+Route::get('stage/{stage}', [SOW::class, 'stage']);
+Route::get('stage/{stage}/category/{category}', [SOW::class, 'category']);
+
+
+
+

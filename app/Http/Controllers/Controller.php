@@ -10,4 +10,23 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function competition(){
+
+        return view('page.competition');
+
+    }
+
+    public function stage(){
+
+        return view('page.stage');
+        
+    }
+
+ public function category(){
+
+    return view('page.category');
+                
+                    }
+
 }
