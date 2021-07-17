@@ -18,4 +18,9 @@ use App\Http\Controllers\SOW;
 */
 
 Route::get('/', [SOW::class, 'competition']);
+Route::get('stage/{stage}', [SOW::class, 'stage']);
+Route::get('stage/{stage}/category/{category}', [SOW::class, 'category']);
+
+
+
 
