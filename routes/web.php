@@ -17,5 +17,5 @@ use App\Http\Controllers\SOW;
 |
 */
 
-Route::get('/', [SOW::class, 'index']);
+Route::get('/', [SOW::class, 'competition']);
 
