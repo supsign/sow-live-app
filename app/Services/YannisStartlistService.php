@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
+use App\Models\Hash;
+
 class YannisStartlistService
 {
     private $dataUrl = 'http://sow2021-server.capricode.ch/data/startlist/startlist.json';
+    private $hashUrl = 'http://sow2021-server.capricode.ch/data/startlist/hash';
 
     public function __construct(
         private CategoryService $categoryService,
@@ -15,14 +18,44 @@ class YannisStartlistService
     ) {
     }
 
-    public function loadData()
+    public function fetchAndParseData()
+    {
+        if (!$this->hashHasUpdated()) {
+            return;
+        }
+        $data = $this->loadData();
+        $this->parseData($data);
+    }
+
+    private function hashHasUpdated(): bool
+    {
+        $hash = Hash::where(['name' => 'startlist'])->first();
+        $hashFromServer = file_get_contents($this->hashUrl);
+
+        if (!$hash) {
+            $hash = Hash::create(['name' => 'startlist', 'hash' => $hashFromServer]);
+
+            return true;
+        }
+
+        if ($hash->hash !== $hashFromServer) {
+            $hash->hash = $hashFromServer;
+            $hash->save();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private function loadData()
     {
         $json = file_get_contents($this->dataUrl);
 
         return json_decode($json);
     }
 
-    public function parseData(array $data)
+    private function parseData(array $data)
     {
         foreach ($data as $entry) {
             $category = $this->categoryService->updateOrCreate($entry);
