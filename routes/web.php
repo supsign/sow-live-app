@@ -19,9 +19,9 @@ use App\Http\Controllers\SOW;
 */
 
 Route::get('/test', [TestController::class, 'test']);
-Route::get('/', [SOW::class, 'competition']);
-Route::get('stage/{stage}', [SOW::class, 'stage']);
-Route::get('stage/{stage}/category/{category}', [SOW::class, 'category']);
+Route::get('/', [SOW::class, 'competition'])->name('competition');
+Route::get('stage/{stage}', [SOW::class, 'stage'])->name('stage');
+Route::get('stage/{stage}/category/{category}', [SOW::class, 'category'])->name('category');
 
 
 

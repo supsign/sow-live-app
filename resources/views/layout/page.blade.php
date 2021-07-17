@@ -15,13 +15,25 @@
 
         <link rel="alternate" hreflang="x-default" href="@php echo url()->full(); @endphp" />
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{{ asset('vendors/fontawesome-pro/css/all.min.css') }}">
-
         <script src="{{ asset('js/app.js') }}" defer></script>
 
     </head>
 
     <body>
-    </body>
+        <div class="flex flex-col h-screen">
+<x-layout.header
+    :title="$title"
+    :heading="$heading"
+    :desc="$desc"
+     />
+
+<div class="flex-grow">
+    {{$slot}}
+</div>
+
+<x-layout.footer />
+        </div>
+
+</body>
 
 </html>
