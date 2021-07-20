@@ -912,6 +912,9 @@ select {
 	--tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
 	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
+.filter {
+	filter: var(--tw-filter) !important;
+}
 .transition-all {
 	transition-property: all !important;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;

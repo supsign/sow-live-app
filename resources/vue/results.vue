@@ -16,7 +16,7 @@
             </tr>
 
         <vue-result
-            v-for="result in results"
+            v-for="result in resultsValidRank"
             :key="result.id"
             :result="result"
             :runner="runnerByResult(result)"
@@ -31,6 +31,7 @@
 import { Component, Prop } from "vue-property-decorator";
 import Vue from "vue";
 import VueResult from "./result.vue";
+import { IResult } from "./result.interface";
 
 @Component({
     components: {
@@ -46,12 +47,17 @@ export default class VueResults extends Vue {
     @Prop({
         type: Array
     })
-    public results: Array<any>;
+    public results: Array<IResult>;
 
     @Prop({
         type: Array
     })
     public starts: Array<any>;
+
+    public get resultsValidRank() {
+        const validResults = this.results.filter(result => !!result.rank);
+        return validResults.sort((a, b) => a.rank - b.rank);
+    }
 
     public runnerByResult(result: any) {
         return this.runners.find(runner => runner.id === result.runner_id);
