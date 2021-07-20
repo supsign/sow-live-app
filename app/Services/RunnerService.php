@@ -15,7 +15,7 @@ class RunnerService
 
     public function updateOrCreate(stdClass $data, Club | null $club = null, Category | null $category = null): Runner
     {
-        $runner = Runner::where(['startnumber' => $data->startnumber])->first();
+        $runner = $this->getByStartnumber($data->startnumber);
 
         if (!$runner) {
             $runner = new Runner();
@@ -51,5 +51,10 @@ class RunnerService
         }
 
         return $runner;
+    }
+
+    public function getByStartnumber(int $startnumber): Runner | null
+    {
+        return Runner::where(['startnumber' => $startnumber])->first();
     }
 }
