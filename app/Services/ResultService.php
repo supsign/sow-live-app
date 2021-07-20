@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Category;
 use App\Models\Result;
 use App\Models\Runner;
 use App\Models\Stage;
@@ -76,5 +77,12 @@ class ResultService
     public function getByRunnerAndStage(Runner $runner, Stage $stage)
     {
         return Result::where(['runner_id' => $runner->id, 'stage_id' => $stage->id])->first();
+    }
+
+    public function getByCategoryAndStage(Category $category, Stage $stage)
+    {
+        $runnersOfCategory = $this->runnerService->getByCategory($category);
+
+        return Result::where(['stage_id' => $stage->id])->whereIn('runner_id', $runnersOfCategory->map(function ($runner) {return $runner->id; }))->get();
     }
 }

@@ -27,7 +27,7 @@
     :desc="$desc"
      />
 
-<div class="flex-grow">
+<div id="app" class="flex-grow">
     {{$slot}}
 </div>
 

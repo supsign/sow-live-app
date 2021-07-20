@@ -13,6 +13,7 @@
     </x-slot>
 
     <div class="flex flex-col mx-8">
+        <vue-results :runners="{{ $runners }}" :starts="{{ $category_starts }}" :results="{{ $results }}"></vue-results>
     @foreach($category_starts as $starts)
     <div>
     {{ $starts->runner->name }}

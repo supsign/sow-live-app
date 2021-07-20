@@ -57,4 +57,9 @@ class RunnerService
     {
         return Runner::where(['startnumber' => $startnumber])->first();
     }
+
+    public function getByCategory(Category $category)
+    {
+        return Runner::where(['category_id' => $category->id])->get();
+    }
 }
