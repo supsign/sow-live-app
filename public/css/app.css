@@ -821,6 +821,9 @@ select {
 .w-full {
 	width: 100% !important;
 }
+.w-24 {
+	width: 6rem !important;
+}
 .flex-grow {
 	flex-grow: 1 !important;
 }
@@ -868,8 +871,14 @@ select {
 .pt-8 {
 	padding-top: 2rem !important;
 }
+.pr-4 {
+	padding-right: 1rem !important;
+}
 .text-center {
 	text-align: center !important;
+}
+.text-right {
+	text-align: right !important;
 }
 .text-base {
 	font-size: 1rem !important;
