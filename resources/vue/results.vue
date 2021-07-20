@@ -1,5 +1,20 @@
 <template>
-    <div class="text-base text-gray-900 bg-white rounded-lg shadow-xl">
+    <div class="px-8 mx-auto">
+
+        <table>
+            <tr>
+            <th>Rang</th>
+            <th>Name</th>
+            <th>Club</th>
+            <th>Start</th>
+            <th>Radio 1</th>
+            <th>Radio 2</th>
+            <th>Radio 3</th>
+            <th>Radio 4</th>
+            <th>Ziel</th>
+            <th>Differenz</th>
+            </tr>
+
         <vue-result
             v-for="result in resultsValidRank"
             :key="result.id"
@@ -7,6 +22,8 @@
             :runner="runnerByResult(result)"
         >
         </vue-result>
+
+        </table>
     </div>
 </template>
 

@@ -787,6 +787,10 @@ select {
 	margin-left: 2rem !important;
 	margin-right: 2rem !important;
 }
+.mx-auto {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
 .mb-8 {
 	margin-bottom: 2rem !important;
 }
@@ -798,6 +802,9 @@ select {
 }
 .flex {
 	display: flex !important;
+}
+.table {
+	display: table !important;
 }
 .grid {
 	display: grid !important;
