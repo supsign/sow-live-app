@@ -12,7 +12,7 @@
     </x-slot>
 
     <div class="grid grid-cols-2 gap-8 mx-8">
-    @foreach($categories as $category)
+    @foreach($categories->sortBy('order') as $category)
     
     <a href="{{ route('category', [$stage, $category]) }}" class="flex flex-col justify-center p-4 text-center transition-all duration-200 bg-gray-300 rounded-md shadow-md h-60 hover:shadow-2xl">
         <div class="mb-8 text-8xl">{{ $category->shortname }}</div>
