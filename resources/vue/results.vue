@@ -125,7 +125,7 @@ export default class VueResults extends Vue {
         const invalidResults = this.results.filter(
             result => !result.rank && result.time
         );
-        return invalidResults.sort((a, b) => a.start.localeCompare(b.start));
+        return invalidResults.sort((a, b) => a.start?.localeCompare(b.start));
     }
 
     public get resultsNotFinishedWithStartTime() {
@@ -149,8 +149,8 @@ export default class VueResults extends Vue {
                 (!result.start || result.start == "00:00")
         );
         return withoutStartTime.sort((a, b) =>
-            this.runnerByResult(a)?.name.localeCompare(
-                this.runnerByResult(b).name
+            this.runnerByResult(a)?.name?.localeCompare(
+                this.runnerByResult(b)?.name
             )
         );
     }
