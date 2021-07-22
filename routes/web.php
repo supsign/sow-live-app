@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/loadresults', [SOW::class, 'loadResultsByStage']);
 
 Route::get('/test', [TestController::class, 'test']);
 Route::get('/', [SOW::class, 'competition'])->name('competition');

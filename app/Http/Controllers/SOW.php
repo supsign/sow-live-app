@@ -44,10 +44,11 @@ class SOW extends Controller
         return $resultService->getByIds($ids);
     }
 
-    public function loadResultsByStage(Stage $stage, PicoTimingService $picoTimingService, StageService $stageService, YannisStartlistService $yannisStartlistService)
+    public function loadResultsByStage(Request $request)
     {
-        $data = $picoTimingService->loadDataByStage($stage);
+        return $request;
+        // $data = $picoTimingService->loadDataByStage($stage);
 
-        return $picoTimingService->parseData(data: $data, stage: $stage);
+        // return $picoTimingService->parseData(data: $data, stage: $stage);
     }
 }
