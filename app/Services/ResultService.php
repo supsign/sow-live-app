@@ -102,4 +102,9 @@ class ResultService
     {
         return Result::where(['stage_id' => $stage->id, 'category_id' => $category->id])->get();
     }
+
+    public function getByIds(array $ids)
+    {
+        return Result::whereIn('id', $ids)->get();
+    }
 }

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Stage;
 use App\Models\Start;
 use App\Services\ResultService;
+use Illuminate\Http\Request;
 
 class SOW extends Controller
 {
@@ -31,5 +32,15 @@ class SOW extends Controller
         $runners = $results->map(function ($result) {return $result->runner; });
 
         return view('page.category', compact('stage', 'category', 'category_starts', 'runners', 'results'));
+    }
+
+    public function getResults(Request $request, ResultService $resultService)
+    {
+        $ids = $request->ids;
+        if (!$ids) {
+            abort(400);
+        }
+
+        return $resultService->getByIds($ids);
     }
 }

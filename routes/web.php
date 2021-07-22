@@ -1,11 +1,8 @@
 <?php
 
+use App\Http\Controllers\SOW;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\SOW;
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +19,4 @@ Route::get('/test', [TestController::class, 'test']);
 Route::get('/', [SOW::class, 'competition'])->name('competition');
 Route::get('stage/{stage}', [SOW::class, 'stage'])->name('stage');
 Route::get('stage/{stage}/category/{category}', [SOW::class, 'category'])->name('category');
-
-
-
-
+Route::post('/getresults', [SOW::class, 'getResults'])->name('getResults');
