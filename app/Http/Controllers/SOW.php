@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Stage;
 use App\Models\Start;
+use App\Services\PicoTimingService;
 use App\Services\ResultService;
 use Illuminate\Http\Request;
 
@@ -44,7 +45,7 @@ class SOW extends Controller
         return $resultService->getByIds($ids);
     }
 
-    public function loadResultsByStage(Stage $stage, PicoTimingService $picoTimingService, StageService $stageService, YannisStartlistService $yannisStartlistService)
+    public function loadResultsByStage(Request $request, Stage $stage, PicoTimingService $picoTimingService)
     {
         $data = $picoTimingService->loadDataByStage($stage);
 

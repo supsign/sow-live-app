@@ -5,16 +5,25 @@
                 <th class="pr-4 text-right">Rang</th>
                 <th class="text-left">Name</th>
                 <th class="text-left">Club</th>
-                <th class="w-20 text-right">Start</th>
-                <th class="w-20 text-right">Radio 1</th>
-                <th class="w-20 text-right ">Radio 2</th>
-                <th class="w-20 text-right">Radio 3</th>
-                <th class="w-20 text-right">Radio 4</th>
-                <th class="w-20 text-right">Ziel</th>
-                <th class="w-20 text-right">+</th>
+                <th class="w-20 pr-4 text-right">Start</th>
+                <th v-if="radioIsUsed.radio1" class="w-20 pr-4 text-right">
+                    Radio 1
+                </th>
+                <th v-if="radioIsUsed.radio2" class="w-20 pr-4 text-right ">
+                    Radio 2
+                </th>
+                <th v-if="radioIsUsed.radio3" class="w-20 pr-4 text-right">
+                    Radio 3
+                </th>
+                <th v-if="radioIsUsed.radio4" class="w-20 pr-4 text-right">
+                    Radio 4
+                </th>
+                <th class="w-20 pr-4 text-right ">Ziel</th>
+                <th class="w-20 pr-4 text-right">+</th>
             </tr>
 
             <vue-result
+                :radioIsUsed="radioIsUsed"
                 v-for="result in resultsValidRank"
                 :key="result.id"
                 :result="result"
@@ -22,6 +31,7 @@
             >
             </vue-result>
             <vue-result
+                :radioIsUsed="radioIsUsed"
                 v-for="result in resultsInvalidRank"
                 :key="result.id"
                 :result="result"
@@ -29,6 +39,7 @@
             >
             </vue-result>
             <vue-result
+                :radioIsUsed="radioIsUsed"
                 v-for="result in resultsNotFinishedWithStartTime"
                 :key="result.id"
                 :result="result"
@@ -36,6 +47,7 @@
             >
             </vue-result>
             <vue-result
+                :radioIsUsed="radioIsUsed"
                 v-for="result in resultsWithoutStartTime"
                 :key="result.id"
                 :result="result"
@@ -145,6 +157,19 @@ export default class VueResults extends Vue {
 
     public runnerByResult(result: any) {
         return this.runners.find(runner => runner.id === result.runner_id);
+    }
+
+    public get radioIsUsed(): {
+        radio1: boolean;
+        radio2: boolean;
+        radio3: boolean;
+        radio4: boolean;
+    } {
+        const radio1 = !!this.results.find(result => result.radio1);
+        const radio2 = !!this.results.find(result => result.radio2);
+        const radio3 = !!this.results.find(result => result.radio3);
+        const radio4 = !!this.results.find(result => result.radio4);
+        return { radio1, radio2, radio3, radio4 };
     }
 }
 </script>
