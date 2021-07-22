@@ -1,5 +1,11 @@
 <template>
-    <tr class="odd:bg-gray-100">
+    <tr
+        class="odd:bg-gray-100"
+        :class="{
+            'bg-red-300': isRecentlyUpdated,
+            'odd:bg-red-300': isRecentlyUpdated
+        }"
+    >
         <td class="w-16 pr-4 text-right">
             {{ result.rank ? result.rank + "." : "" }}
         </td>
@@ -27,6 +33,8 @@
 <script lang="ts">
 import { Component, Prop } from "vue-property-decorator";
 import Vue from "vue";
+import * as moment from "moment";
+import { IResult } from "./result.interface";
 
 @Component
 export default class VueResult extends Vue {
@@ -38,7 +46,7 @@ export default class VueResult extends Vue {
     @Prop({
         type: Object
     })
-    public result: any;
+    public result: IResult;
 
     @Prop({
         type: Object
@@ -49,5 +57,12 @@ export default class VueResult extends Vue {
         radio3: boolean;
         radio4: boolean;
     };
+
+    public get isRecentlyUpdated(): boolean {
+        const lastUpdate = moment(this.result.last_update);
+        const now = moment();
+
+        return now.diff(lastUpdate, "minutes") < 2;
+    }
 }
 </script>

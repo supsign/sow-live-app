@@ -6,16 +6,16 @@
                 <th class="text-left">Name</th>
                 <th class="text-left">Club</th>
                 <th class="w-20 pr-4 text-right">Start</th>
-                <th v-if="radioIsUsed.radio1" class="w-20 pr-4 text-right">
+                <th v-if="radioIsUsed.radio1" class="w-28 pr-4 text-right">
                     Radio 1
                 </th>
-                <th v-if="radioIsUsed.radio2" class="w-20 pr-4 text-right ">
+                <th v-if="radioIsUsed.radio2" class="w-28 pr-4 text-right ">
                     Radio 2
                 </th>
-                <th v-if="radioIsUsed.radio3" class="w-20 pr-4 text-right">
+                <th v-if="radioIsUsed.radio3" class="w-28 pr-4 text-right">
                     Radio 3
                 </th>
-                <th v-if="radioIsUsed.radio4" class="w-20 pr-4 text-right">
+                <th v-if="radioIsUsed.radio4" class="w-28 pr-4 text-right">
                     Radio 4
                 </th>
                 <th class="w-20 pr-4 text-right ">Ziel</th>
