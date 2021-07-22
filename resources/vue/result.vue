@@ -5,14 +5,14 @@
         </td>
         <td>{{ runner.name }}</td>
         <td>{{ runner.club ? "club" : "-" }}</td>
-        <td class="w-24 text-right">{{ result.start_full }}</td>
+        <td class="w-24 pr-4 text-right">{{ result.start_full }}</td>
 
-        <td class="text-right">{{ result.radio1 }}</td>
-        <td class="text-right">{{ result.radio2 }}</td>
-        <td class="text-right">{{ result.radio3 }}</td>
-        <td class="text-right">{{ result.radio4 }}</td>
-        <td class="text-right">{{ result.time }}</td>
-        <td class="text-right">{{ result.behind }}</td>
+        <td class="pr-4 text-right">{{ result.radio1 }}</td>
+        <td class="pr-4 text-right">{{ result.radio2 }}</td>
+        <!-- <td class="text-right">{{ result.radio3 }}</td>
+        <td class="text-right">{{ result.radio4 }}</td> -->
+        <td class="pr-4 text-right">{{ result.time }}</td>
+        <td class="pr-4 text-right">{{ result.behind }}</td>
     </tr>
 </template>
 

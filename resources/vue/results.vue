@@ -5,13 +5,13 @@
                 <th class="pr-4 text-right">Rang</th>
                 <th class="text-left">Name</th>
                 <th class="text-left">Club</th>
-                <th class="w-20 text-right">Start</th>
-                <th class="w-20 text-right">Radio 1</th>
-                <th class="w-20 text-right ">Radio 2</th>
-                <th class="w-20 text-right">Radio 3</th>
-                <th class="w-20 text-right">Radio 4</th>
-                <th class="w-20 text-right">Ziel</th>
-                <th class="w-20 text-right">+</th>
+                <th class="w-20 pr-4 text-right">Start</th>
+                <th class="w-20 pr-4 text-right">Radio 1</th>
+                <th class="w-20 pr-4 text-right ">Radio 2</th>
+                <!-- <th class="w-20 text-right">Radio 3</th>
+                <th class="w-20 text-right">Radio 4</th> -->
+                <th class="w-20 pr-4 text-right ">Ziel</th>
+                <th class="w-20 pr-4 text-right">+</th>
             </tr>
 
             <vue-result
