@@ -38,8 +38,8 @@ class RunnerService
             $runner->category_id = $category->id;
         }
 
-        if ($runner->name !== $data->name) {
-            $runner->name = $data->name;
+        if ($runner->name !== trim($data->name)) {
+            $runner->name = trim($data->name);
         }
 
         if ($runner->year_of_birth !== $data->yearOfBirth) {
@@ -56,5 +56,10 @@ class RunnerService
     public function getByStartnumber(int $startnumber): Runner | null
     {
         return Runner::where(['startnumber' => $startnumber])->first();
+    }
+
+    public function getByCategory(Category $category)
+    {
+        return Runner::where(['category_id' => $category->id])->get();
     }
 }
