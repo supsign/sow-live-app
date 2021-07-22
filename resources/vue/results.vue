@@ -1,6 +1,5 @@
 <template>
     <div class="px-8 mx-auto">
-
         <table class="w-full mb-8 text-xl">
             <tr>
                 <th class="pr-4 text-right">Rang</th>
@@ -52,6 +51,7 @@ import { Component, Prop } from "vue-property-decorator";
 import Vue from "vue";
 import VueResult from "./result.vue";
 import { IResult } from "./result.interface";
+import axios from "axios";
 
 @Component({
     components: {
@@ -67,12 +67,42 @@ export default class VueResults extends Vue {
     @Prop({
         type: Array
     })
-    public results: Array<IResult>;
+    public initResults: Array<IResult>;
+
+    public results: Array<IResult> = null;
+
+    public conReloadStarts: NodeJS.Timer;
 
     @Prop({
         type: Array
     })
     public starts: Array<any>;
+
+    public created() {
+        this.results = this.initResults;
+    }
+
+    public mounted() {
+        this.continouslyReloadStarts();
+    }
+
+    public beforeDestroy() {
+        clearInterval(this.conReloadStarts);
+    }
+
+    public continouslyReloadStarts() {
+        this.conReloadStarts = setInterval(this.reloadStarts, 5000);
+    }
+
+    public async reloadStarts() {
+        if (!this.results.length) {
+            return;
+        }
+        const results = await axios.post("/getresults", {
+            ids: this.results.map(result => result.id)
+        });
+        this.results = results.data;
+    }
 
     public get resultsValidRank() {
         const validResults = this.results.filter(result => !!result.rank);
