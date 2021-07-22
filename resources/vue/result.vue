@@ -7,10 +7,18 @@
         <td>{{ runner.club ? runner.club.name : "-" }}</td>
         <td class="w-24 pr-4 text-right">{{ result.start_full }}</td>
 
-        <td class="pr-4 text-right">{{ result.radio1 }}</td>
-        <td class="pr-4 text-right">{{ result.radio2 }}</td>
-        <!-- <td class="text-right">{{ result.radio3 }}</td>
-        <td class="text-right">{{ result.radio4 }}</td> -->
+        <td v-if="radioIsUsed.radio1" class="pr-4 text-right">
+            {{ result.radio1 }}
+        </td>
+        <td v-if="radioIsUsed.radio2" class="pr-4 text-right">
+            {{ result.radio2 }}
+        </td>
+        <td v-if="radioIsUsed.radio3" class="pr-4 text-right">
+            {{ result.radio3 }}
+        </td>
+        <td v-if="radioIsUsed.radio4" class="pr-4 text-right">
+            {{ result.radio4 }}
+        </td>
         <td class="pr-4 text-right">{{ result.time }}</td>
         <td class="pr-4 text-right">{{ result.behind }}</td>
     </tr>
@@ -31,5 +39,15 @@ export default class VueResult extends Vue {
         type: Object
     })
     public result: any;
+
+    @Prop({
+        type: Object
+    })
+    radioIsUsed: {
+        radio1: boolean;
+        radio2: boolean;
+        radio3: boolean;
+        radio4: boolean;
+    };
 }
 </script>

@@ -16,4 +16,8 @@ class TestController extends Controller
         // return $picoTimingService->parseData(data: $data, stage: $stage);
         $yannisStartlistService->fetchAndParseData();
     }
+
+    public function test2()
+    {
+    }
 }
