@@ -146,5 +146,6 @@ export default class VueResults extends Vue {
     public runnerByResult(result: any) {
         return this.runners.find(runner => runner.id === result.runner_id);
     }
+    
 }
 </script>

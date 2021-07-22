@@ -4,7 +4,7 @@
             {{ result.rank ? result.rank + "." : "" }}
         </td>
         <td>{{ runner.name }}</td>
-        <td>{{ runner.club ? "club" : "-" }}</td>
+        <td>{{ runner.club ? runner.club.name : "-" }}</td>
         <td class="w-24 pr-4 text-right">{{ result.start_full }}</td>
 
         <td class="pr-4 text-right">{{ result.radio1 }}</td>
