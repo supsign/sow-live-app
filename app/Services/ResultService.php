@@ -31,9 +31,9 @@ class ResultService
             $result->stage_id = $stage->id;
         }
 
-        if ($result->last_update === $data->last_modification) {
-            return $result;
-        }
+        // if ($result->last_update === $data->last_modification) {
+        //     return $result;
+        // }
 
         if ($result->rank !== intval($data->rang, 10)) {
             $result->rank = intval($data->rang, 10);

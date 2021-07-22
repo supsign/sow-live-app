@@ -51,7 +51,7 @@ class Kernel extends ConsoleKernel
                 )
             ),
             new StageService()
-        ))->everyMinute()->withoutOverlapping();
+        ))->everyMinute();
     }
 
     /**
