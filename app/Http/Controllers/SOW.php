@@ -26,8 +26,9 @@ class SOW extends Controller
     public function category(Stage $stage, Category $category, ResultService $resultService)
     {
         $category_starts = Start::where(['stage_id' => $stage->id, 'category_id' => $category->id])->get();
-        $runners = $category_starts->map(function ($start) {return $start->runner; });
+
         $results = $resultService->getByCategoryAndStage($category, $stage);
+        $runners = $results->map(function ($result) {return $result->runner; });
 
         return view('page.category', compact('stage', 'category', 'category_starts', 'runners', 'results'));
     }

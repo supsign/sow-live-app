@@ -11,7 +11,7 @@ use stdClass;
 
 class ResultService
 {
-    public function __construct(private RunnerService $runnerService)
+    public function __construct(private RunnerService $runnerService, private CategoryService $categoryService)
     {
     }
 
@@ -29,6 +29,10 @@ class ResultService
             $result = new Result();
             $result->runner_id = $runner->id;
             $result->stage_id = $stage->id;
+        }
+
+        if ($result->last_update === $data->last_modification) {
+            return $result;
         }
 
         if ($result->rank !== intval($data->rang, 10)) {
@@ -67,8 +71,23 @@ class ResultService
             $result->behind = $data->behind;
         }
 
+        if ($result->last_update !== $data->last_modification) {
+            $result->last_update = $data->last_modification;
+        }
+
+        $category = $this->categoryService->getByShortname($data->kategorie);
+
+        if (!$result->category || $result->category->shortname !== $data->kategorie) {
+            $result->category_id = $category->id;
+        }
+
         if ($result->isDirty() || !$result->exists) {
             $result->save();
+        }
+
+        if ($runner->category->shortname !== $data->kategorie) {
+            $runner->category_id = $category->id;
+            $runner->save();
         }
 
         return $result;
@@ -81,8 +100,6 @@ class ResultService
 
     public function getByCategoryAndStage(Category $category, Stage $stage)
     {
-        $runnersOfCategory = $this->runnerService->getByCategory($category);
-
-        return Result::where(['stage_id' => $stage->id])->whereIn('runner_id', $runnersOfCategory->map(function ($runner) {return $runner->id; }))->get();
+        return Result::where(['stage_id' => $stage->id, 'category_id' => $category->id])->get();
     }
 }

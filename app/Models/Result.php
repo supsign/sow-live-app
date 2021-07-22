@@ -15,4 +15,9 @@ class Result extends Model
     {
         return $this->belongsTo(Stage::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

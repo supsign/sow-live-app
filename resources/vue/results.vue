@@ -15,14 +15,20 @@
                 <th class="w-20 text-right">+</th>
             </tr>
 
-        <vue-result
-            v-for="result in resultsValidRank"
-            :key="result.id"
-            :result="result"
-            :runner="runnerByResult(result)"
-        >
-        </vue-result>
-
+            <vue-result
+                v-for="result in resultsValidRank"
+                :key="result.id"
+                :result="result"
+                :runner="runnerByResult(result)"
+            >
+            </vue-result>
+            <vue-result
+                v-for="result in resultsInvalidRank"
+                :key="result.id"
+                :result="result"
+                :runner="runnerByResult(result)"
+            >
+            </vue-result>
         </table>
     </div>
 </template>
@@ -57,6 +63,13 @@ export default class VueResults extends Vue {
     public get resultsValidRank() {
         const validResults = this.results.filter(result => !!result.rank);
         return validResults.sort((a, b) => a.rank - b.rank);
+    }
+
+    public get resultsInvalidRank() {
+        const invalidResults = this.results.filter(
+            result => !result.rank && result.time
+        );
+        return invalidResults.sort((a, b) => a.start.localeCompare(b.start));
     }
 
     public runnerByResult(result: any) {
