@@ -3,16 +3,16 @@
 
         <table>
             <tr>
-            <th>Rang</th>
-            <th>Name</th>
-            <th>Club</th>
-            <th>Start</th>
-            <th>Radio 1</th>
-            <th>Radio 2</th>
-            <th>Radio 3</th>
-            <th>Radio 4</th>
-            <th>Ziel</th>
-            <th>Differenz</th>
+                <th class="pr-4 text-right">Rang</th>
+                <th class="text-left">Name</th>
+                <th class="text-left">Club</th>
+                <th class="w-20 text-right">Start</th>
+                <th class="w-20 text-right">Radio 1</th>
+                <th class="w-20 text-right ">Radio 2</th>
+                <th class="w-20 text-right">Radio 3</th>
+                <th class="w-20 text-right">Radio 4</th>
+                <th class="w-20 text-right">Ziel</th>
+                <th class="w-20 text-right">+</th>
             </tr>
 
         <vue-result
