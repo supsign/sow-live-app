@@ -1,6 +1,7 @@
 <template>
     <div class="px-8 mx-auto">
-        <table>
+
+        <table class="w-full mb-8 text-xl">
             <tr>
                 <th class="pr-4 text-right">Rang</th>
                 <th class="text-left">Name</th>
