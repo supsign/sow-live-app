@@ -28,6 +28,20 @@
                 :runner="runnerByResult(result)"
             >
             </vue-result>
+            <vue-result
+                v-for="result in resultsNotFinishedWithStartTime"
+                :key="result.id"
+                :result="result"
+                :runner="runnerByResult(result)"
+            >
+            </vue-result>
+            <vue-result
+                v-for="result in resultsWithoutStartTime"
+                :key="result.id"
+                :result="result"
+                :runner="runnerByResult(result)"
+            >
+            </vue-result>
         </table>
     </div>
 </template>
@@ -69,6 +83,33 @@ export default class VueResults extends Vue {
             result => !result.rank && result.time
         );
         return invalidResults.sort((a, b) => a.start.localeCompare(b.start));
+    }
+
+    public get resultsNotFinishedWithStartTime() {
+        const notFinishedWithStartTime = this.results.filter(
+            result =>
+                !result.rank &&
+                !result.time &&
+                result.start &&
+                result.start !== "00:00"
+        );
+        return notFinishedWithStartTime.sort((a, b) =>
+            a.start_full.localeCompare(b.start_full)
+        );
+    }
+
+    public get resultsWithoutStartTime() {
+        const withoutStartTime = this.results.filter(
+            result =>
+                !result.rank &&
+                !result.time &&
+                (!result.start || result.start == "00:00")
+        );
+        return withoutStartTime.sort((a, b) =>
+            this.runnerByResult(a)?.name.localeCompare(
+                this.runnerByResult(b).name
+            )
+        );
     }
 
     public runnerByResult(result: any) {

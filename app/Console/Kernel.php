@@ -2,9 +2,12 @@
 
 namespace App\Console;
 
+use App\Jobs\FetchResults;
 use App\Jobs\FetchStartlist;
 use App\Services\CategoryService;
 use App\Services\ClubService;
+use App\Services\PicoTimingService;
+use App\Services\ResultService;
 use App\Services\RunnerService;
 use App\Services\StageService;
 use App\Services\StartService;
@@ -27,7 +30,28 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new FetchStartlist(new YannisStartlistService(new CategoryService(), new ClubService(), new RunnerService(new ClubService(), new CategoryService()), new StartService(), new StageService())))->everyMinute()->withoutOverlapping();
+        $schedule->job(new FetchStartlist(
+            new YannisStartlistService(
+                new CategoryService(),
+                new ClubService(),
+                new RunnerService(
+                    new ClubService(),
+                    new CategoryService()
+                ),
+                new StartService(),
+                new StageService()
+            )
+        ))->everyTwoHours()->withoutOverlapping();
+        $schedule->job(new FetchResults(
+            new PicoTimingService(
+                new RunnerService(new ClubService(), new CategoryService()),
+                new ResultService(
+                    new RunnerService(new ClubService(), new CategoryService()),
+                    new CategoryService()
+                )
+            ),
+            new StageService()
+        ))->everyMinute()->withoutOverlapping();
     }
 
     /**

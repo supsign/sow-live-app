@@ -11,4 +11,5 @@ export interface IResult {
     behind: string;
     runner_id: number;
     stage_id: number;
+    start_full: string;
 }
