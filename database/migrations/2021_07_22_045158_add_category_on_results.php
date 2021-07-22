@@ -4,25 +4,30 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLastUpdateOnResults extends Migration
+class AddCategoryOnResults extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
     public function up()
     {
         Schema::table('results', function (Blueprint $table) {
-            $table->string('last_update')->nullable()->after('stage_id');
+            $table->foreignId('category_id')->constrained();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
     public function down()
     {
         Schema::table('results', function (Blueprint $table) {
-            $table->dropColumn('last_update');
+            $table->dropForeign(['category_id']);
+            $table->dropColumn('category_id');
         });
     }
 }
