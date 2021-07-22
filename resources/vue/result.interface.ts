@@ -12,4 +12,5 @@ export interface IResult {
     runner_id: number;
     stage_id: number;
     start_full: string;
+    last_update: string;
 }
