@@ -1,28 +1,33 @@
 <template>
     <div class="px-8 mx-auto">
-
         <table>
             <tr>
-            <th>Rang</th>
-            <th>Name</th>
-            <th>Club</th>
-            <th>Start</th>
-            <th>Radio 1</th>
-            <th>Radio 2</th>
-            <th>Radio 3</th>
-            <th>Radio 4</th>
-            <th>Ziel</th>
-            <th>Differenz</th>
+                <th>Rang</th>
+                <th>Name</th>
+                <th>Club</th>
+                <th>Start</th>
+                <th>Radio 1</th>
+                <th>Radio 2</th>
+                <th>Radio 3</th>
+                <th>Radio 4</th>
+                <th>Ziel</th>
+                <th>Differenz</th>
             </tr>
 
-        <vue-result
-            v-for="result in resultsValidRank"
-            :key="result.id"
-            :result="result"
-            :runner="runnerByResult(result)"
-        >
-        </vue-result>
-
+            <vue-result
+                v-for="result in resultsValidRank"
+                :key="result.id"
+                :result="result"
+                :runner="runnerByResult(result)"
+            >
+            </vue-result>
+            <vue-result
+                v-for="result in resultsInvalidRank"
+                :key="result.id"
+                :result="result"
+                :runner="runnerByResult(result)"
+            >
+            </vue-result>
         </table>
     </div>
 </template>
@@ -57,6 +62,13 @@ export default class VueResults extends Vue {
     public get resultsValidRank() {
         const validResults = this.results.filter(result => !!result.rank);
         return validResults.sort((a, b) => a.rank - b.rank);
+    }
+
+    public get resultsInvalidRank() {
+        const invalidResults = this.results.filter(
+            result => !result.rank && result.time
+        );
+        return invalidResults.sort((a, b) => a.start.localeCompare(b.start));
     }
 
     public runnerByResult(result: any) {
