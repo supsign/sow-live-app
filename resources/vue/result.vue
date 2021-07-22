@@ -1,7 +1,16 @@
 <template>
-        <tr>
-       {{ result.rank }} {{ runner.name }} {{ result.start }} {{ runner.club ? "club" : "" }} {{ result.radio1 }} 
-       {{ result.radio2 }} {{ result.radio3 }} {{ result.radio4 }} {{ result.time }} {{ result.behind }}
+        <tr class="odd:bg-gray-100">
+            <td class="w-16 pr-4 text-right">{{ result.rank ? result.rank + '.' : "" }}</td>
+            <td>{{ runner.name }}</td>
+                        <td>{{ runner.club ? "club" : "-" }}</td>
+            <td class="w-24 text-right">{{ result.start }}</td>
+
+            <td class="text-right">{{ result.radio1 }}</td>
+            <td class="text-right">{{ result.radio2 }}</td>
+            <td class="text-right">{{ result.radio3 }}</td>
+            <td class="text-right">{{ result.radio4 }}</td>
+            <td class="text-right">{{ result.time }}</td>
+            <td class="text-right">{{ result.behind }}</td>
        </tr>
 </template>
 
