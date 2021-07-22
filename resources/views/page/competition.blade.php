@@ -5,11 +5,11 @@
     </x-slot>
 
     <x-slot name="heading">
-    Startlisten
+    Startlisten & Resultate
     </x-slot>
 
     <x-slot name="desc">
-        Wähle die passende Etappe aus. 
+        &nbsp;
     </x-slot>
 
     <div class="grid grid-cols-2 gap-8 mx-8">
