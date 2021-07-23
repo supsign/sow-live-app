@@ -4,7 +4,7 @@
             <tr>
                 <th class="pr-4 text-right">Rang</th>
                 <th class="text-left">Name</th>
-                                <th class="w-20 pr-4 text-right">Start</th>
+                <th class="w-20 pr-4 text-right">Start</th>
 
                 <th class="text-left">Club</th>
                 <th v-if="radioIsUsed.radio1" class="pr-4 text-right w-28">
@@ -65,6 +65,7 @@ import Vue from "vue";
 import VueResult from "./result.vue";
 import { IResult } from "./result.interface";
 import axios from "axios";
+import * as moment from "moment";
 
 @Component({
     components: {
@@ -171,6 +172,66 @@ export default class VueResults extends Vue {
         const radio3 = !!this.results.find(result => result.radio3);
         const radio4 = !!this.results.find(result => result.radio4);
         return { radio1, radio2, radio3, radio4 };
+    }
+
+    public get meanTimes() {
+        const radio1s = this.results
+            .map(result => result.radio1)
+            .filter(radio1 => !!radio1)
+            .map(radio1 => this.stringToDuration(radio1).milliseconds());
+        const radio1m = this.meanValue(radio1s);
+        const radio2s = this.results
+            .map(result => result.radio2)
+            .filter(radio2 => !!radio2)
+            .map(radio2 => this.stringToDuration(radio2).milliseconds());
+        const radio2m = this.meanValue(radio2s);
+        const radio3s = this.results
+            .map(result => result.radio3)
+            .filter(radio3 => !!radio3)
+            .map(radio3 => this.stringToDuration(radio3).milliseconds());
+        const radio3m = this.meanValue(radio3s);
+        const radio4s = this.results
+            .map(result => result.radio4)
+            .filter(radio4 => !!radio4)
+            .map(radio4 => this.stringToDuration(radio4).milliseconds());
+        const radio4m = this.meanValue(radio4s);
+
+        return { radio1m, radio2m, radio3m, radio4m };
+    }
+
+    public stringToDuration(time: string): moment.Duration {
+        if (time.length === 5) {
+            time = "00:" + time;
+        }
+
+        const timeSplitted = time.split(":");
+
+        return moment.duration({
+            seconds: parseInt(timeSplitted[2]),
+            minutes: parseInt(timeSplitted[1]),
+            hours: parseInt(timeSplitted[0])
+        });
+    }
+
+    public meanValue(values: number[]) {
+        let tot = 0;
+
+        if (values.length === 0) {
+            return 0;
+        }
+
+        for (const value of values) {
+            tot += value;
+        }
+
+        return Math.round(tot / values.length);
+    }
+
+    public factor(mean: number, actual: number) {
+        if (mean < 1 || actual < 1) {
+            return 0;
+        }
+        return actual / mean;
     }
 }
 </script>
