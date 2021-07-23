@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Stage;
+use stdClass;
 
 class PicoTimingService
 {
@@ -22,13 +23,22 @@ class PicoTimingService
 
     public function parseData(array $data, Stage $stage)
     {
+        $results = [];
         foreach ($data as $entry) {
             $runner = $this->runnerService->getByStartnumber($entry->stnr);
             if (!$runner) {
-                continue;
+                $runnerData = new stdClass();
+                $runnerData->startnumber = $entry->stnr;
+                $runnerData->club = '';
+                $runnerData->name = $entry->name;
+                $runnerData->yearOfBirth = $entry->jg;
+                $runnerData->category = $entry->kategorie;
+                $runner = $this->runnerService->updateOrCreate($runnerData);
             }
 
-            $this->resultService->updateOrCreate(data: $entry, stage: $stage);
+            $results[] = $this->resultService->updateOrCreate(data: $entry, stage: $stage);
         }
+
+        return $results;
     }
 }

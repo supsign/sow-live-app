@@ -20,7 +20,7 @@ class ResultService
         $runner = $this->runnerService->getByStartnumber($data->stnr);
 
         if (!$runner) {
-            new Exception($data->stnr.' nicht gefunden');
+            throw new Exception('runner not found');
         }
 
         $result = $this->getByRunnerAndStage(runner: $runner, stage: $stage);
