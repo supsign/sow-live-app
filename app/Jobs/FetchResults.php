@@ -29,7 +29,7 @@ class FetchResults implements ShouldQueue
      */
     public function handle()
     {
-        $stage = $this->stageService->getByNumber(4);
+        $stage = $this->stageService->getByNumber(5);
         $data = $this->picoTimingService->loadDataByStage($stage);
 
         return $this->picoTimingService->parseData(data: $data, stage: $stage);

@@ -4,18 +4,19 @@
             <tr>
                 <th class="pr-4 text-right">Rang</th>
                 <th class="text-left">Name</th>
+                                <th class="w-20 pr-4 text-right">Start</th>
+
                 <th class="text-left">Club</th>
-                <th class="w-20 pr-4 text-right">Start</th>
-                <th v-if="radioIsUsed.radio1" class="w-20 pr-4 text-right">
+                <th v-if="radioIsUsed.radio1" class="pr-4 text-right w-28">
                     Radio 1
                 </th>
-                <th v-if="radioIsUsed.radio2" class="w-20 pr-4 text-right ">
+                <th v-if="radioIsUsed.radio2" class="pr-4 text-right w-28 ">
                     Radio 2
                 </th>
-                <th v-if="radioIsUsed.radio3" class="w-20 pr-4 text-right">
+                <th v-if="radioIsUsed.radio3" class="pr-4 text-right w-28">
                     Radio 3
                 </th>
-                <th v-if="radioIsUsed.radio4" class="w-20 pr-4 text-right">
+                <th v-if="radioIsUsed.radio4" class="pr-4 text-right w-28">
                     Radio 4
                 </th>
                 <th class="w-20 pr-4 text-right ">Ziel</th>
@@ -125,7 +126,7 @@ export default class VueResults extends Vue {
         const invalidResults = this.results.filter(
             result => !result.rank && result.time
         );
-        return invalidResults.sort((a, b) => a.start.localeCompare(b.start));
+        return invalidResults.sort((a, b) => a.start?.localeCompare(b.start));
     }
 
     public get resultsNotFinishedWithStartTime() {
@@ -149,8 +150,8 @@ export default class VueResults extends Vue {
                 (!result.start || result.start == "00:00")
         );
         return withoutStartTime.sort((a, b) =>
-            this.runnerByResult(a)?.name.localeCompare(
-                this.runnerByResult(b).name
+            this.runnerByResult(a)?.name?.localeCompare(
+                this.runnerByResult(b)?.name
             )
         );
     }
